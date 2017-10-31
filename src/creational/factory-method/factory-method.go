@@ -28,34 +28,22 @@ func (this *Sub) Calculate(rhs int, lhs int) int {
 }
 
 /*
- 定义工厂接口
+ 定义工厂方法
 */
-type Factory interface{
-	CreateOperate() Operate
-}
-/*
-  实现加法工厂
-*/
-type AddFactory struct {
+type Factory struct {
 }
 
-func NewAddFactory() *AddFactory {
-	return new(AddFactory)
+func NewFactory() *Factory {
+	return &Factory{}
 }
 
-func (this *AddFactory) CreateOperate() Operate {
-	return &Add{}
-}
-/*
-  实现减法工厂
-*/
-type SubFactory struct {
-}
-
-func NewSubFactory() *SubFactory {
-	return new(SubFactory)
-}
-
-func (this *SubFactory) CreateOperate() Operate {
-	return &Sub{}
+func (this *Factory) CreateOperate(operateName string) Operate {
+	switch operateName {
+	case "+":
+		return &Add{}
+	case "-":
+		return &Sub{}
+	default:
+		panic("invalid operate")
+	}
 }
