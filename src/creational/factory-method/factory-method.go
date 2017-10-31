@@ -30,6 +30,10 @@ func (this *Sub) Calculate(rhs int, lhs int) int {
 /*
  定义工厂
 */
+type Factory interface{
+	CreateOperate(string) Operate
+}
+
 type OperateFactory struct {
 }
 
