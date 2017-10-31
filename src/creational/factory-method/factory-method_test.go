@@ -12,9 +12,9 @@ func TestFactoryMethod(t *testing.T) {
 		}
 	}()
 
-	add := NewAddFactory().CreateOperate()
+	add := NewFactory().CreateOperate("+")
 	log.Printf("add result is %d\n", add.Calculate(1, 2))
-	sub := NewSubFactory().CreateOperate()
+	sub := NewFactory().CreateOperate("-")
 	log.Printf("sub result is %d\n", sub.Calculate(1, 2))
 	return
 }
