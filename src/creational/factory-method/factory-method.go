@@ -3,8 +3,8 @@ package factory_method
 /*
  首先定义一个运算接口
 */
-type Operator interface {
-	Operator(int, int) int
+type Operate interface {
+	Calculate(int, int) int
 }
 
 /*
@@ -13,7 +13,7 @@ type Operator interface {
 type Add struct {
 }
 
-func (this *Add) Operator(rhs int, lhs int) int {
+func (this *Add) Calculate(rhs int, lhs int) int {
 	return rhs + lhs
 }
 
@@ -23,28 +23,27 @@ func (this *Add) Operator(rhs int, lhs int) int {
 type Sub struct {
 }
 
-func (this *Sub) Operator(rhs int, lhs int) int {
+func (this *Sub) Calculate(rhs int, lhs int) int {
 	return rhs - lhs
 }
 
 /*
  定义工厂
 */
-type OperatorFactory struct {
+type OperateFactory struct {
 }
 
-func NewOperatorFactory() *OperatorFactory {
-	return new(OperatorFactory)
+func NewOperateFactory() *OperateFactory {
+	return new(OperateFactory)
 }
 
-func (this *OperatorFactory) CreateOperate(operator string) Operator {
-	switch operator {
+func (this *OperateFactory) CreateOperate(operate string) Operate {
+	switch operate {
 	case "+":
 		return &Add{}
 	case "-":
 		return &Sub{}
 	default:
-		panic("invalid operator")
-		return nil
+		panic("invalid operate")
 	}
 }
