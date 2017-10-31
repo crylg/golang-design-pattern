@@ -16,11 +16,11 @@ Golang Design Patterns
       </td>
       <td>
         <ul>
-          <li><a href="creational/factory-method">工厂方法模式（Factory Pattern）</a></li>
-          <li><a href="creational/abstract-factory">抽象工厂模式（Abstract Factory Pattern）</a></li>
-          <li><a href="creational/singleton">单例模式（Singleton Pattern）</a></li>
-          <li><a href="creational/builder">建造者模式（Builder Pattern）</a></li>
-          <li><a href="creational/prototype">原型模式（Prototype Pattern）</a></li>
+          <li><a href="src/creational/factory-method">工厂方法模式（Factory Pattern）</a></li>
+          <li><a href="src/creational/abstract-factory">抽象工厂模式（Abstract Factory Pattern）</a></li>
+          <li><a href="src/creational/singleton">单例模式（Singleton Pattern）</a></li>
+          <li><a href="src/creational/builder">建造者模式（Builder Pattern）</a></li>
+          <li><a href="src/creational/prototype">原型模式（Prototype Pattern）</a></li>
         </ul>
       </td>
     </tr>
