@@ -13,6 +13,6 @@ func TestFactoryMethod(t *testing.T) {
 	}()
 
 	operate := NewOperateFactory().CreateOperate("+")
-	log.Printf("add result is %d\n", operate.Operate(1, 2))
+	log.Printf("add result is %d\n", operate.Calculate(1, 2))
 	return
 }
