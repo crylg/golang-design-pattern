@@ -12,7 +12,7 @@ func TestFactoryMethod(t *testing.T) {
 		}
 	}()
 
-	operator := NewOperatorFactory().CreateOperate("+")
-	log.Printf("add result is %d\n", operator.Operator(1, 2))
+	operate := NewOperateFactory().CreateOperate("+")
+	log.Printf("add result is %d\n", operate.Operate(1, 2))
 	return
 }
