@@ -31,23 +31,28 @@ func (this *Sub) Calculate(rhs int, lhs int) int {
  定义工厂
 */
 type Factory interface{
-	CreateOperate(string) Operate
+	CreateOperate() Operate
 }
 
-type OperateFactory struct {
+type AddFactory struct {
 }
 
-func NewOperateFactory() *OperateFactory {
-	return new(OperateFactory)
+func NewAddFactory() *AddFactory {
+	return new(AddFactory)
 }
 
-func (this *OperateFactory) CreateOperate(operate string) Operate {
-	switch operate {
-	case "+":
-		return &Add{}
-	case "-":
-		return &Sub{}
-	default:
-		panic("invalid operate")
-	}
+func (this *AddFactory) CreateOperate() Operate {
+	return &Add{}
 }
+
+type SubFactory struct {
+}
+
+func NewSubFactory() *SubFactory {
+	return new(SubFactory)
+}
+
+func (this *SubFactory) CreateOperate() Operate {
+	return &Sub{}
+}
+
