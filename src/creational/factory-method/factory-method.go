@@ -1,49 +1,51 @@
 package factory_method
 
-/*
- 首先定义一个运算接口
-*/
-type Operate interface {
+const (
+	add = "+"
+	sub = "-"
+	mul = "*"
+	div = "/"
+)
+
+type Arithmetic interface {
 	Calculate(int, int) int
 }
 
-/*
- 定义 加法运算
-*/
-type Add struct {
+type Add struct{}
+
+func (a *Add) Calculate(left int, right int) int {
+	return left + right
 }
 
-func (this *Add) Calculate(rhs int, lhs int) int {
-	return rhs + lhs
+type Sub struct{}
+
+func (s *Sub) Calculate(left int, right int) int {
+	return left - right
 }
 
-/*
- 定义减法运算
-*/
-type Sub struct {
+type Mul struct{}
+
+func (m *Mul) Calculate(left int, right int) int {
+	return left * right
 }
 
-func (this *Sub) Calculate(rhs int, lhs int) int {
-	return rhs - lhs
+type Div struct{}
+
+func (d *Div) Calculate(left int, right int) int {
+	return left / right
 }
 
-/*
- 定义工厂方法
-*/
-type Factory struct {
-}
-
-func NewFactory() *Factory {
-	return &Factory{}
-}
-
-func (this *Factory) CreateOperate(operateName string) Operate {
-	switch operateName {
-	case "+":
+func Factory(operation string) Arithmetic {
+	switch  operation {
+	case add:
 		return &Add{}
-	case "-":
+	case sub:
 		return &Sub{}
+	case mul:
+		return new(Mul)
+	case div:
+		return new(Div)
 	default:
-		panic("invalid operate")
+		panic("invalid operation")
 	}
 }

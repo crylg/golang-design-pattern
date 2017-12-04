@@ -2,7 +2,6 @@ package prototype
 
 import (
 	"testing"
-	"log"
 )
 
 func TestPrototype(t *testing.T) {
@@ -12,9 +11,15 @@ func TestPrototype(t *testing.T) {
 	origin.SetAge(28)
 
 	clone := origin.Clone()
-	log.Printf("origin origin:%v, clone:%v ", origin, clone)
+	if &origin == &clone {
+		t.Errorf("origin:%v equals clone:%v ", &origin, &clone)
+	}
 
 	clone.SetName("Bruce")
 	clone.SetAge(25)
-	log.Printf("modify origin:%v, clone:%v ", origin, clone)
+	origin.SetName("Jack")
+	origin.SetAge(100)
+	if &origin == &clone {
+		t.Errorf("origin:%v equals clone:%v ", &origin, &clone)
+	}
 }

@@ -2,6 +2,7 @@ package prototype
 
 import (
 	"bytes"
+	"strconv"
 )
 
 type Prototype struct {
@@ -10,32 +11,31 @@ type Prototype struct {
 	age  int
 }
 
-func (this *Prototype) SetName(name string) {
-	this.name = name
+func (p *Prototype) SetName(name string) {
+	p.name = name
 }
 
-func (this *Prototype) SetSex(sex string) {
-	this.sex = sex
+func (p *Prototype) SetSex(sex string) {
+	p.sex = sex
 }
 
-func (this *Prototype) SetAge(age int) {
-	this.age = age
+func (p *Prototype) SetAge(age int) {
+	p.age = age
 }
 
-func (this *Prototype) Clone() *Prototype {
-	clone := *this
+func (p *Prototype) Clone() *Prototype {
+	clone := *p
 	return &clone
 }
 
-func (this *Prototype) ToString() string {
+func (p *Prototype) ToString() string {
 	var buf bytes.Buffer
 	buf.WriteString("Prototype:{ name = ")
-	buf.WriteString(this.name)
+	buf.WriteString(p.name)
 	buf.WriteString(", sex = ")
-	buf.WriteString(this.sex)
+	buf.WriteString(p.sex)
 	buf.WriteString(", age = ")
-	buf.WriteString(string(this.age))
+	buf.WriteString(strconv.Itoa(p.age))
 	buf.WriteString("}")
 	return buf.String()
-
 }

@@ -4,49 +4,68 @@ import (
 	"log"
 )
 
-/*
-  首先定义了interface Worker，其中包含一个方法Work(task *string)
-  然后定义创建Worker的interface WorkerCreator，包含一个接口Create() ，返回值为Worker
-*/
-
-type Worker interface {
-	Work(task string)
-}
-
-type WorkerCreator interface {
-	Create() Worker
-}
+const (
+	mysql  = "mysql"
+	oracle = "oracle"
+	sqlite = "sqlite"
+)
 
 /*
- 假设有一个工种程序员，实现了Work接口，同时定义其构造类，实现Create()接口
+  define interface: Driver
+  define abstract create factory interface: AbstractFactory
 */
-type Programmer struct {
+type Driver interface {
+	Registry(name string)
 }
 
-func (p *Programmer) Work(task string) {
-	log.Println("Programmer process", task)
-}
-
-type ProgrammerCreator struct {
-}
-
-func (c *ProgrammerCreator) Create() Worker {
-	return new(Programmer)
+type AbstractFactory interface {
+	Create() Driver
 }
 
 /*
-  有一个工种农场主，实现了Work接口，同时定义其构造类，实现Create()接口
+  Mysql Class implement Driver
+  MysqlFactory implement AbstractFactory
 */
-type Farmer struct {
+type Mysql struct{}
+
+func (m *Mysql) Registry(name string) {
+	log.Printf("registry %s driver with: %s", mysql, name)
 }
 
-func (f *Farmer) Work(task string) {
-	log.Println("Farmer process", task)
+type MysqlFactory struct{}
+
+func (m *MysqlFactory) Create() Driver {
+	return new(Mysql)
 }
 
-type FarmerCreator struct {
+/*
+  Oracle implements Driver
+  OracleFactory implement AbstractFactory
+*/
+type Oracle struct{}
+
+func (o *Oracle) Registry(name string) {
+	log.Printf("registry %s driver with: %s", oracle, name)
 }
 
-func (c *FarmerCreator) Create() Worker {
-	return new(Farmer)
+type OracleFactory struct{}
+
+func (c *OracleFactory) Create() Driver {
+	return new(Oracle)
+}
+
+/*
+ Sqlite implements Driver
+ SqliteFactory implements AbstractFactory
+*/
+type Sqlite struct{}
+
+func (s *Sqlite) Registry(name string) {
+	log.Printf("registry %s driver with: %s", sqlite, name)
+}
+
+type SqliteFactory struct{}
+
+func (s *SqliteFactory) Create() Driver {
+	return new(Sqlite)
 }

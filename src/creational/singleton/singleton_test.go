@@ -1,11 +1,18 @@
 package singleton
 
-import "testing"
+import (
+	"testing"
+)
+
+func generateAloneInstance(e interface{}, t *testing.T) {
+	for i := 0; i < 100; i++ {
+		a := new(Alone)
+		if e != a {
+			t.Errorf("singleton pattern error: %v and %v", e, a)
+		}
+	}
+}
 
 func TestSingleton(t *testing.T) {
-	ins1 := GetInstance()
-	ins2 := GetInstance()
-	if ins1 != ins2 {
-		t.Errorf("singleton pattern error with %v and %v", ins1, ins2)
-	}
+	generateAloneInstance(GetInstance(), t)
 }

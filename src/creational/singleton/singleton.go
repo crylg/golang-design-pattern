@@ -1,22 +1,22 @@
 package singleton
 
 import (
-	"sync"
 	"log"
+	"sync"
 )
 
-type Alone struct {
-}
+var a *Alone
+var once sync.Once
 
 func GetInstance() *Alone {
-	var once sync.Once
-	var alone *Alone
 	once.Do(func() {
-		alone = &Alone{}
+		a = &Alone{}
 	})
-	return alone
+	return a
 }
 
+type Alone struct{}
+
 func (a Alone) Alone() {
-	log.Println("alone...")
+	log.Println("a...")
 }

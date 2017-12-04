@@ -1,6 +1,9 @@
 package builder
 
-import "bytes"
+import (
+	"bytes"
+	"strconv"
+)
 
 /*
   定义一个对象
@@ -19,13 +22,17 @@ func (p *Person) SetAge(age int) {
 	p.Age = age
 }
 
+func newPerson() *Person {
+	return new(Person)
+}
+
 func (p *Person) ToString() string {
 	var buf bytes.Buffer
 	buf.WriteString("Person{")
 	buf.WriteString("name='")
 	buf.WriteString(p.Name)
 	buf.WriteString(", age=")
-	buf.WriteString(string(p.Age))
+	buf.WriteString(strconv.Itoa(p.Age))
 	buf.WriteString("}")
 	return buf.String()
 }
@@ -34,8 +41,8 @@ func (p *Person) ToString() string {
   定义Builder方法
 */
 type Builder interface {
-	SetName(name string) Builder
-	SetAge(age int) Builder
+	Name(name string) Builder
+	Age(age int) Builder
 	Build() *Person
 }
 
@@ -43,17 +50,17 @@ type PersonBuilder struct {
 	person *Person
 }
 
-func (p *PersonBuilder) SetName(name string) Builder {
+func (p *PersonBuilder) Name(name string) Builder {
 	if p.person == nil {
-		p.person = &Person{}
+		p.person = newPerson()
 	}
 	p.person.SetName(name)
 	return p
 }
 
-func (p *PersonBuilder) SetAge(age int) Builder {
+func (p *PersonBuilder) Age(age int) Builder {
 	if p.person == nil {
-		p.person = &Person{}
+		p.person = newPerson()
 	}
 	p.person.SetAge(age)
 	return p
